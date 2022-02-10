@@ -10,8 +10,10 @@ public class Calculator {
     public static int add(String numbers){
         if(numbers.isEmpty()){
             return 0;
-        } else if( numbers.contains(",\n") || numbers.contains("\n,") ){
+        } else if( numbers.contains(",\n") || numbers.contains("\n,") ) {
             throw new IllegalArgumentException("Delimiter and 'next line sign' are next to each other. Wrong input");
+        } else if (numbers.replaceAll("[,\n]", "").matches("\\D*")){
+            throw new IllegalArgumentException("Non numeric character present. Wrong input");
         } else {
             return Stream.of(numbers.split("[,\n]"))
                     .map(Integer::parseInt)
