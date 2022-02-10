@@ -36,7 +36,8 @@ class CalculatorTest {
         TWO_ANOTHER_NUMBERS("-5,2", -3),
         THREE_NUMBERS("10,20,30", 60),
         THREE_ANOTHER_NUMBERS("10000,20000,30000", 60_000),
-        NEW_LINE_DELIMITER("1\n2,3", 6);
+        NEW_LINE_DELIMITER("1\n2,3", 6),
+        CUSTOM_DELIMITER("//;\n1;2", 3);
 
         private final String input;
         private final int result;
