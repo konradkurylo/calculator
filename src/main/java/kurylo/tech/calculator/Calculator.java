@@ -10,6 +10,8 @@ public class Calculator {
     public static int add(String numbers){
         if(numbers.isEmpty()){
             return 0;
+        } else if( numbers.contains(",\n") || numbers.contains("\n,") ){
+            throw new IllegalArgumentException("Two delimiters are next to each other. Wrong input");
         } else {
             return Stream.of(numbers.split("[,\n]"))
                     .map(Integer::parseInt)
