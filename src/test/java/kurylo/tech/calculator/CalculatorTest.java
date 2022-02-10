@@ -21,7 +21,8 @@ class CalculatorTest {
     public void parameterizedUnHappyPathTest(CalculatorUnHappyPathScenario calculatorScenario){
         org.junit.jupiter.api.Assertions.assertThrows(
                 calculatorScenario.getException(),
-                ()->Calculator.add(calculatorScenario.getInput())
+                ()->Calculator.add(calculatorScenario.getInput()),
+                calculatorScenario.getExceptionMessage()
         );
     }
 
@@ -44,11 +45,12 @@ class CalculatorTest {
     @Getter
     @AllArgsConstructor
     public enum CalculatorUnHappyPathScenario {
-        TWO_DELIMITERS_AFTER_EACH_OTHER("1,\n", IllegalArgumentException.class),
-        TWO_DELIMITERS_AFTER_EACH_OTHER_ANOTHER_CASE("1,4\n,", IllegalArgumentException.class);
+        TWO_DELIMITERS_AFTER_EACH_OTHER("1,\n", IllegalArgumentException.class, "Delimiter and 'next line sign' are next to each other. Wrong input"),
+        TWO_DELIMITERS_AFTER_EACH_OTHER_ANOTHER_CASE("1,4\n,", IllegalArgumentException.class, "Delimiter and 'next line sign' are next to each other. Wrong input");
 
         private final String input;
         private final Class<? extends Throwable> exception;
+        private final String exceptionMessage;
     }
 
 }
