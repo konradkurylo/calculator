@@ -21,7 +21,8 @@ class CalculatorTest {
     public enum CalculatorScenario {
         EMPTY_STRING("",0),
         ONE_NUMBER("1",1),
-        ANOTHER_ONE_NUMBER("10000",10_000);
+        ANOTHER_ONE_NUMBER("10000",10_000),
+        TWO_NUMBERS("1,2", 3);
 
         private final String input;
         private final int result;
