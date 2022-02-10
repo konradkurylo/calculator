@@ -20,7 +20,8 @@ class CalculatorTest {
     @AllArgsConstructor
     public enum CalculatorScenario {
         EMPTY_STRING("",0),
-        ONE_NUMBER("1",1);
+        ONE_NUMBER("1",1),
+        ANOTHER_ONE_NUMBER("10000",10_000);
 
         private final String input;
         private final int result;
