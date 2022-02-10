@@ -11,7 +11,7 @@ public class Calculator {
         if(numbers.isEmpty()){
             return 0;
         } else {
-            return Stream.of(numbers.split(","))
+            return Stream.of(numbers.split("[,\n]"))
                     .map(Integer::parseInt)
                     .reduce(0, Integer::sum);
         }
