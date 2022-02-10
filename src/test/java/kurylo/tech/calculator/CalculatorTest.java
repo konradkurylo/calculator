@@ -19,7 +19,8 @@ class CalculatorTest {
     @Getter
     @AllArgsConstructor
     public enum CalculatorScenario {
-        EMPTY_STRING("",0);
+        EMPTY_STRING("",0),
+        ONE_NUMBER("1",1);
 
         private final String input;
         private final int result;
