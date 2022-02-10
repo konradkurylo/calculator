@@ -45,6 +45,9 @@ class CalculatorTest {
     @Getter
     @AllArgsConstructor
     public enum CalculatorUnHappyPathScenario {
+        NON_NUMERIC_CHARACTERS_PRESENT("a", IllegalArgumentException.class, "Non numeric character present. Wrong input"),
+        NON_NUMERIC_CHARACTERS_PRESENT_ANOTHER("1,!\n", IllegalArgumentException.class, "Non numeric character present. Wrong input"),
+        NON_NUMERIC_CHARACTERS_PRESENT_YET_ANOTHER("\n),1\n", IllegalArgumentException.class, "Non numeric character present. Wrong input"),
         TWO_DELIMITERS_AFTER_EACH_OTHER("1,\n", IllegalArgumentException.class, "Delimiter and 'next line sign' are next to each other. Wrong input"),
         TWO_DELIMITERS_AFTER_EACH_OTHER_ANOTHER_CASE("1,4\n,", IllegalArgumentException.class, "Delimiter and 'next line sign' are next to each other. Wrong input");
 
