@@ -9,16 +9,25 @@ import org.junit.jupiter.params.provider.EnumSource;
 class CalculatorTest {
 
     @ParameterizedTest
-    @EnumSource(CalculatorScenario.class)
-    public void parameterizedTest(CalculatorScenario calculatorScenario){
+    @EnumSource(CalculatorHappyPathScenario.class)
+    public void parameterizedHappyPathTest(CalculatorHappyPathScenario calculatorScenario){
         Assertions
                 .assertThat(Calculator.add(calculatorScenario.getInput()))
                 .isEqualTo(calculatorScenario.getResult());
     }
 
+    @ParameterizedTest
+    @EnumSource(CalculatorUnHappyPathScenario.class)
+    public void parameterizedUnHappyPathTest(CalculatorUnHappyPathScenario calculatorScenario){
+        org.junit.jupiter.api.Assertions.assertThrows(
+                calculatorScenario.getException(),
+                ()->Calculator.add(calculatorScenario.getInput())
+        );
+    }
+
     @Getter
     @AllArgsConstructor
-    public enum CalculatorScenario {
+    public enum CalculatorHappyPathScenario {
         EMPTY_STRING("",0),
         ONE_NUMBER("1",1),
         ANOTHER_ONE_NUMBER("10000",10_000),
@@ -30,6 +39,16 @@ class CalculatorTest {
 
         private final String input;
         private final int result;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public enum CalculatorUnHappyPathScenario {
+        TWO_DELIMITERS_AFTER_EACH_OTHER("1,\n", IllegalArgumentException.class),
+        TWO_DELIMITERS_AFTER_EACH_OTHER_ANOTHER_CASE("1,4\n,", IllegalArgumentException.class);
+
+        private final String input;
+        private final Class<? extends Throwable> exception;
     }
 
 }
