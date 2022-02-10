@@ -15,21 +15,25 @@ public class Calculator {
             return 0;
         } else {
             Preprocessor preprocessor = Preprocessor.of(numbers);
+            validateInput(preprocessor.getInputToProcess(), preprocessor.getDelimiter());
             return nonEmptyStringCalculation(preprocessor.getInputToProcess(), preprocessor.getDelimiter());
         }
     }
 
-    private static Integer nonEmptyStringCalculation(String inputToProcess, String delimiter) {
+    private static void validateInput(String inputToProcess, String delimiter){
         if( inputToProcess.contains(delimiter + "\n") || inputToProcess.contains("\n" + delimiter) ) {
             throw new IllegalArgumentException("Delimiter and 'next line sign' are next to each other. Wrong input");
-        } else if (inputToProcess.replaceAll("["+ delimiter + "\n]", "").matches("\\D*")){
-            throw new IllegalArgumentException("Non numeric character present. Wrong input");
-        } else {
-            return Stream.of(inputToProcess.split("["+ delimiter + "\n]"))
-                    .filter(e->!e.isEmpty())
-                    .map(Integer::parseInt)
-                    .reduce(0, Integer::sum);
         }
+        if (inputToProcess.replaceAll("["+ delimiter + "\n]", "").matches("\\D*")){
+            throw new IllegalArgumentException("Non numeric character present. Wrong input");
+        }
+    }
+
+    private static Integer nonEmptyStringCalculation(String inputToProcess, String delimiter) {
+        return Stream.of(inputToProcess.split("["+ delimiter + "\n]"))
+                .filter(e->!e.isEmpty())
+                .map(Integer::parseInt)
+                .reduce(0, Integer::sum);
     }
 
     @Getter
