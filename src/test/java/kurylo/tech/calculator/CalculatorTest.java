@@ -23,7 +23,9 @@ class CalculatorTest {
         ONE_NUMBER("1",1),
         ANOTHER_ONE_NUMBER("10000",10_000),
         TWO_NUMBERS("1,2", 3),
-        TWO_ANOTHER_NUMBERS("-5,2", -3);
+        TWO_ANOTHER_NUMBERS("-5,2", -3),
+        THREE_NUMBERS("10,20,30", 60),
+        THREE_ANOTHER_NUMBERS("10000,20000,30000", 60_000);
 
         private final String input;
         private final int result;
